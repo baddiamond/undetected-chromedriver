@@ -31,17 +31,18 @@ with codecs.open(
 
 
 setup(
-    name="undetected-chromedriver",
+    name="st-undetected-chromedriver",
     version=version,
     packages=["undetected_chromedriver"],
     install_requires=[
         "selenium",
         "requests",
         "websockets",
+        "billiard"
     ],
-    url="https://github.com/ultrafunkamsterdam/undetected-chromedriver",
+    url="https://github.com/baddiamond/undetected-chromedriver",
     license="GPL-3.0",
-    author="UltrafunkAmsterdam",
+    author="UltrafunkAmsterdam/baddiamond-support",
     author_email="info@blackhat-security.nl",
     description="""\
     selenium.webdriver.Chrome replacement wiht compatiblity for Brave, and other Chromium baed browsers.

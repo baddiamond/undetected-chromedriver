@@ -1,4 +1,5 @@
-import multiprocessing
+import billiard as multiprocessing
+
 import os
 import platform
 import sys
