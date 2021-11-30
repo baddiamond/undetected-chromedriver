@@ -97,9 +97,7 @@ class Chrome(selenium.webdriver.chrome.webdriver.WebDriver):
             headless=False,
             delay=5,
             version_main=None,
-            patcher_force_close=False,
-            cookie_data=None,
-            error=None,
+            patcher_force_close=False
     ):
         """
         Creates a new instance of the chrome driver.
@@ -337,6 +335,8 @@ class Chrome(selenium.webdriver.chrome.webdriver.WebDriver):
         # )
 
         self.reactor = None
+        self.cookie = None
+        self.error = None
         if enable_cdp_events:
 
             if logging.getLogger().getEffectiveLevel() == logging.DEBUG:
@@ -568,6 +568,22 @@ class Chrome(selenium.webdriver.chrome.webdriver.WebDriver):
     def clear_cdp_listeners(self):
         if self.reactor and isinstance(self.reactor, Reactor):
             self.reactor.handlers.clear()
+
+    def set_cookie_st(self, cookie):
+        self.cookie = cookie
+
+        return self.cookie
+
+    def get_cookie_st(self):
+        return self.cookie
+
+    def set_error(self, error):
+        self.error = error
+
+        return self.error
+
+    def get_error(self):
+        return self.error
 
     def tab_new(self, url: str):
         """
