@@ -13,6 +13,7 @@ import sys
 import tempfile
 import time
 import inspect
+from pathlib import Path
 
 import requests
 import selenium.webdriver.chrome.service
@@ -196,6 +197,13 @@ class Chrome(selenium.webdriver.chrome.webdriver.WebDriver):
 
         user_data_dir, language, keep_user_data_dir = None, None, None
 
+        try:
+            os.mkdir('{}/tmp'.format(Path.home()))
+        except OSError:
+            print("Creation of the directory %s failed" % '{}/tmp'.format(Path.home()))
+        else:
+            print("Successfully created the directory %s " % '{}/tmp'.format(Path.home()))
+
         # see if a custom user profile is specified
         for arg in options.arguments:
 
@@ -232,7 +240,7 @@ class Chrome(selenium.webdriver.chrome.webdriver.WebDriver):
                 )
 
             else:
-                user_data_dir = os.path.normpath(tempfile.mkdtemp())
+                user_data_dir = os.path.normpath(tempfile.mkdtemp(dir='{}/tmp'.format(Path.home())))
                 keep_user_data_dir = False
                 arg = "--user-data-dir=%s" % user_data_dir
                 options.add_argument(arg)
